@@ -1,37 +1,38 @@
 <template>
   <div class="home">
-    home
-    <p ref="p">My name is {{ name }} and my age is {{ age }}</p>
+    <h1>Home</h1>
+    <p>My name is {{ name }} and my age is {{ age }}</p>
     <button @click="handleClick">click me</button>
+    <button @click="age++">Add 1 to age</button>
+    <input type="text" v-model="name" />
   </div>
 </template>
 
 <script>
 import { ref } from '@vue/reactivity';
-// @ is an alias to /src
 
 export default {
   name: 'Home',
   setup() {
-    console.log(this);
+    // const p = ref('hello');
 
-    const p = ref('hello');
-    console.log(p, p.value);
-
-    let name = 'Kyle';
-    let age = 16;
+    const name = ref('Kyle');
+    const age = ref(16);
 
     const handleClick = () => {
-      console.log(p, p.value);
-      p.value.classList.add('test');
-      p.value.textContent = 'hello, wewos';
+      name.value = 'Kate';
+      age.value = 13;
     };
 
     return {
       name,
       age,
       handleClick,
-      p,
+    };
+  },
+  data() {
+    return {
+      score: 5,
     };
   },
 };
