@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <div v-for="name in names" :key="name">{{ name }}</div>
+    <input type="text" v-model="search" />
+    <p>search term: {{ search }}</p>
+    <div v-for="name in matchingNames" :key="name">{{ name }}</div>
   </div>
 </template>
 
@@ -11,8 +13,21 @@ import { computed, ref } from '@vue/reactivity';
 export default {
   name: 'Home',
   setup() {
-    const names = ref(['alex', 'ethan', 'j.j', 'kyle', 'nixon', 'nolan']);
-    return { names };
+    const search = ref('');
+    const names = ref([
+      'Alex Carrilo',
+      'Ethan Trevino',
+      'Jeffrey-James Turner',
+      'Kyle Hernandez',
+      'Nixon Blankenship',
+      'Nolan Blankenship',
+    ]);
+
+    const matchingNames = computed(() => {
+      return names.value.filter((name) => name.includes(search.value));
+    });
+
+    return { names, search, matchingNames };
   },
 };
 </script>
